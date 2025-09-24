@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:ui="jakarta.faces.facelets">
+    <h:head>
+        <title> #{title}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </h:head>
+     <h:body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+        
+        <header>
+            <ui:include src="/WEB-INF/header/header.xhtml" />
+        </header>
+        
+        <main class="flex-grow p-6">
+            <ui:insert name="content" />
+        </main>
+       
+        <footer class="mt-auto">
+            <ui:include src="/WEB-INF/footer/footer.xhtml" />
+        </footer>
+    </h:body>
+</html>

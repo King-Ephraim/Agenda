@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core">
+    <f:metadata>
+        <f:viewParam name="idTypeEvenement" value="#{typeEvenementBean.idTypeEvenement}" />
+        <f:viewAction action="#{typeEvenementBean.initEdition()}" />
+    </f:metadata>
+    <ui:param name="title" value="Édition des catégories" />
+
+    <ui:define name="content">
+        <div>
+            <h:form styleClass="flex flex-col space-y-4 p-4">
+
+                <h:messages globalOnly="true" styleClass="text-red-600 text-sm mb-2"/>
+                <h:inputHidden id="idTypeEvenement" value="#{typeEvenementBean.typeEvenement.id}"/>
+
+                <div class="space-y-2">
+                    <h:outputLabel for="intitule" value="Intitulé" styleClass="font-semibold text-gray-700" />
+                    <h:inputText id="intitule" value="#{typeEvenementBean.typeEvenement.intitule}" required="true" requiredMessage="Champ requis" styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600"/>
+                    <h:message for="intitule" styleClass="text-xs text-red-500 mt-1"/>
+                </div>
+
+                <div class="space-y-2">
+                    <h:outputLabel for="description" value="Description" styleClass="font-semibold text-gray-700" />
+                    <h:inputTextarea id="description" value="#{typeEvenementBean.typeEvenement.description}" rows="3" required="true" requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600"/>
+                    <h:message for="description" styleClass="text-xs text-red-500 mt-1"/>
+                </div>
+
+                <div class="flex justify-end space-x-3 mt-4">
+                    <h:link value="Annuler" outcome="/typeEvenement"
+                                     styleClass="bg-gray-500 hover:bg-gray-600 text-white rounded-lg px-4 py-2"/>
+                    <h:commandButton value="Enregistrer"
+                                     action="#{typeEvenementBean.enregistrer()}"
+                                     styleClass="bg-green-600 hover:bg-green-700 text-white rounded-lg px-4 py-2 shadow"/>
+                </div>
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

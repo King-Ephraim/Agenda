@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets">
+
+
+    <div class="bg-green-700 text-white px-8 py-4 flex items-center justify-between shadow-lg">
+
+
+        <h2 class="text-2xl font-bold tracking-wide">Agenda</h2>
+
+
+        <nav>
+            <ul class="flex items-center space-x-8 font-medium">
+                <li>
+                    <h:link outcome="/acceuil" value="Accueil" styleClass="text-lg hover:text-green-200 hover:underline underline-offset-8 transition"/>
+                </li>
+                <li>
+                    <h:link outcome="/semaine" value="Semaine" styleClass="text-lg hover:text-green-200 hover:underline underline-offset-8 transition"/>
+                </li>
+                <li>
+                    <h:link outcome="/mois" value="Mois" styleClass="text-lg hover:text-green-200 hover:underline underline-offset-8 transition"/>
+                </li>
+                <li>
+                    <h:link outcome="/categorie" value="Catégorie" styleClass="text-lg hover:text-green-200 hover:underline underline-offset-8 transition"/>
+                </li>
+                <li>
+                    <h:link outcome="/typeEvenement" value="Types d'événement" styleClass="text-lg hover:text-green-200 hover:underline underline-offset-8 transition"/>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="flex items-center space-x-4">
+            <h:outputText value="#{formBean.utilisateur.email}" styleClass="text-sm font-bold"/>
+
+            <h:form id="logoutForm" class="bg-green-600 hover:bg-green-800 px-3 py-2 rounded-lg transition flex items-center space-x-2">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <h:commandButton action="#{formBean.logout()}" value="logout" styleClass="text-lg ml-2"/>
+            </h:form>
+        </div>
+    </div>
+</ui:composition>

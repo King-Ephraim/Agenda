@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:param name="title" value="Welcome" />
+
+    <ui:define name="content">
+        <h:form class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold">Mes Evenements</h1>
+                <div class="flex justify-center items-center space-x-2">
+                    <div class="flex justify-center items-center border border-gray-700 rounded-full px-4 py-2 transition focus-within:ring-2 focus-within:ring-blue-500 bg-white">
+                        <i class="fa-solid fa-magnifying-glass text-gray-500"></i>
+                        <h:inputText label="Rechercher" value="#{evenementBean.requete}" styleClass="border-0 outline-none px-2 bg-transparent"/>
+                    </div>
+                    <h:commandButton value="Rechercher" action="#{evenementBean.rechercher()}"
+                                     styleClass="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-full shadow-md transition"/>
+                </div>
+
+                <div class="flex items-center justify-center bg-green-700 hover:bg-green-800 text-white font-bold py-3 px-4 rounded-lg shadow-md transition">
+                    <i class="fa-solid fa-plus"></i>
+                    <h:link outcome="/edits/editEvenement" value="Nouvel événement" />
+                </div>
+            </div>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 ">
+                <ui:repeat value="#{evenementBean.liste}" var="e">
+                    <div class="bg-white rounded-xl shadow-md p-5 flex flex-col space-y-3 hover:shadow-lg transition w-full">
+
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-bold text-green-700">#{e.intitule}</h2>
+                            <div class="flex items-center justify-center space-x-3">
+
+                                <h:link outcome="/edits/editEvenement.xhtml"
+                                        styleClass="p-2 rounded hover:bg-blue-100 transition"
+                                        title="Modifier">
+                                    <f:param name="idEvenement" value="#{e.id}" />
+                                    <i class="fa-solid fa-pen-to-square text-blue-500 hover:text-blue-700"></i>
+                                </h:link>
+
+                                <div class="flex items-center justify-center p-2 rounded hover:bg-red-100 transition ">
+                                    <h:commandButton action="#{evenementBean.supprimer(e)}"
+                                                     value="supprimer           "
+                                                     title="Supprimer"
+                                                     styleClass="">
+                                        <i class="fa-solid fa-trash text-red-500 hover:text-red-700"></i>
+                                    </h:commandButton>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="flex items-center justify-start space-x-6 text-gray-600 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-calendar text-green-500"></i>
+                                <span>
+                                    <h:outputText value="#{e.dateDebut}">
+                                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                    -
+                                    <h:outputText value="#{e.dateFin}">
+                                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </span>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-clock text-green-500"></i>
+                                <span>
+                                    <h:outputText value="#{e.heureDebut}">
+                                        <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                                    </h:outputText>
+                                    -
+                                    <h:outputText value="#{e.heureFin}">
+                                        <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                                    </h:outputText>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Catégorie et type -->
+                        <div class="flex space-x-2 pt-1">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                #{e.categorie.intitule}
+                            </span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                                #{e.typeEvenement.intitule}
+                            </span>
+                        </div>
+
+
+                        <p class="text-gray-600 text-sm">#{e.description}</p>
+
+                    </div>
+                </ui:repeat>
+            </div>
+
+
+        </h:form>
+
+
+
+    </ui:define>
+</ui:composition>

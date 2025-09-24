@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core">
+    <f:metadata>
+        <f:viewParam name="idEvenement" value="#{evenementBean.idEvenement}" />
+        <f:viewAction action="#{evenementBean.initEdition()}" />
+    </f:metadata>
+    <ui:param name="title" value="Édition des catégories" />
+
+    <ui:define name="content">
+        <div>
+            <h:form styleClass="flex flex-col space-y-4 p-4">
+
+                
+                <h:messages globalOnly="true" styleClass="text-red-600 text-sm mb-2"/>
+
+                <h:inputHidden id="idEvenement" value="#{evenementBean.evenement.id}"/>
+
+                
+                <div class="space-y-2">
+                    <h:outputLabel for="intitule" value="Intitulé" styleClass="font-semibold text-gray-700" />
+                    <h:inputText id="intitule" value="#{evenementBean.evenement.intitule}" 
+                                 required="true" requiredMessage="Champ requis"
+                                 styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none"/>
+                    <h:message for="intitule" styleClass="text-xs text-red-500 mt-1"/>
+                </div>
+
+               
+                <div class="space-y-2">
+                    <h:outputLabel for="description" value="Description" styleClass="font-semibold text-gray-700" />
+                    <h:inputTextarea id="description" value="#{evenementBean.evenement.description}" rows="3" 
+                                     required="true" requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none"/>
+                    <h:message for="description" styleClass="text-xs text-red-500 mt-1"/>
+                </div>
+                
+                <div class="space-y-2 space-x-3">
+                     <h:selectBooleanCheckbox id="estJourneeEntiere" value="#{evenementBean.evenement.estJourneeEntiere}"/>
+                    <h:outputLabel for="estJourneeEntiere" value="Journée entière" styleClass="font-semibold text-gray-700" />
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                   
+                    <div class="space-y-2">
+                        <h:outputLabel for="dateDebut" value="Date de début" styleClass="font-semibold text-gray-700" />
+                        <h:inputText id="dateDebut" 
+                                     value="#{evenementBean.evenement.dateDebut}" 
+                                     required="true" 
+                                     requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:passThroughAttribute name="type" value="date" />
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+                        <h:message for="dateDebut" styleClass="text-xs text-red-500 mt-1"/>
+                    </div>
+
+                    
+                    <div class="space-y-2">
+                        <h:outputLabel for="dateFin" value="Date de fin" styleClass="font-semibold text-gray-700" />
+                        <h:inputText id="dateFin" 
+                                     value="#{evenementBean.evenement.dateFin}" 
+                                     required="true" 
+                                     requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:passThroughAttribute name="type" value="date" />
+                            <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                        </h:inputText>
+                        <h:message for="dateFin" styleClass="text-xs text-red-500 mt-1"/>
+                    </div>
+
+                    
+                    <div class="space-y-2">
+                        <h:outputLabel for="heureDebut" value="Heure de début" styleClass="font-semibold text-gray-700" />
+                        <h:inputText id="heureDebut" 
+                                     value="#{evenementBean.evenement.heureDebut}" 
+                                     required="true" 
+                                     requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:passThroughAttribute name="type" value="time" />
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:inputText>
+                        <h:message for="heureDebut" styleClass="text-xs text-red-500 mt-1"/>
+                    </div>
+
+                    
+                    <div class="space-y-2">
+                        <h:outputLabel for="heureFin" value="Heure de fin" styleClass="font-semibold text-gray-700" />
+                        <h:inputText id="heureFin" 
+                                     value="#{evenementBean.evenement.heureFin}" 
+                                     required="true" 
+                                     requiredMessage="Champ requis"
+                                     styleClass="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:passThroughAttribute name="type" value="time" />
+                            <f:convertDateTime type="localTime" pattern="HH:mm"/>
+                        </h:inputText>
+                        <h:message for="heureFin" styleClass="text-xs text-red-500 mt-1"/>
+                    </div>
+
+                </div>
+
+               
+                <div class="flex items-center space-x-3 mt-4">
+
+                    
+                    <div class="space-y-2 w-full">
+                        <h:outputLabel for="categorie" value="Catégorie" styleClass="font-semibold text-gray-700" />
+
+                        <h:selectOneMenu id="categorie" converter="categorieConverter"
+                                         value="#{evenementBean.evenement.categorie}" 
+                                         required="true" requiredMessage="Veuillez sélectionner une catégorie"
+                                         styleClass="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:selectItem itemLabel="-- Veuillez sélectionner une option --" noSelectionOption="true"/>
+                            <f:selectItems value="#{categorieBean.liste}" var="c" itemValue="#{c}" itemLabel="#{c.intitule}" />
+                        </h:selectOneMenu>
+
+                        <h:message for="categorie" styleClass="text-xs text-red-500 mt-1" />
+                    </div>
+
+                    
+                    <div class="space-y-2 w-full">
+                        <h:outputLabel for="typeEvenement" value="Type d'événement" styleClass="font-semibold text-gray-700" />
+
+                        <h:selectOneMenu id="typeEvenement" converter="typeEvenementConverter"
+                                         value="#{evenementBean.evenement.typeEvenement}" 
+                                         required="true" requiredMessage="Veuillez sélectionner un type d'événement"
+                                         styleClass="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-green-600 focus:outline-none">
+                            <f:selectItem itemLabel="-- Veuillez sélectionner une option --"  noSelectionOption="true" />
+                            <f:selectItems value="#{typeEvenementBean.liste}" var="t" itemValue="#{t}" itemLabel="#{t.intitule}" />
+                        </h:selectOneMenu>
+
+                        <h:message for="typeEvenement" styleClass="text-xs text-red-500 mt-1" />
+                    </div>
+
+                </div>
+
+                
+                <div class="flex justify-end space-x-3 mt-4">
+                    <h:link value="Annuler" outcome="/acceuil"
+                            styleClass="bg-gray-500 hover:bg-gray-600 text-white rounded-lg px-4 py-2"/>
+                    <h:commandButton value="Enregistrer"
+                                     action="#{evenementBean.enregistrer()}"
+                                     styleClass="bg-green-600 hover:bg-green-700 text-white rounded-lg px-4 py-2 shadow"/>
+                </div>
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

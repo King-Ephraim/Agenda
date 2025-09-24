@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition template="/WEB-INF/templates/layout.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:param name="title" value="Édition des catégories" />
+
+    <ui:define name="content">
+        <h:form id="categorieForm">
+
+            <div class="flex items-center justify-between m-6">
+                <h1 class="text-2xl font-bold text-gray-800">Liste de mes catégories</h1>
+                <div class="flex items-center space-x-2">
+                    <h:link value="Nouvelle Catégorie" outcome="/edits/editCategorie"
+                            styleClass="bg-green-600 hover:bg-green-700 text-white 
+                            font-medium rounded-lg px-4 py-2 shadow transition duration-200"/>
+                </div>
+            </div>
+
+
+            <div class="p-4 overflow-x-auto">
+                <h:dataTable id="c" var="c" value="#{categorieBean.liste}"
+                             styleClass="min-w-full border border-gray-200 rounded-lg"
+                             headerClass="bg-gray-100 text-gray-700 font-semibold text-left px-4 py-2"
+                             rowClasses="odd:bg-white even:bg-gray-50">
+
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{c.id}" styleClass="px-4 py-2 text-gray-700"/>
+                    </h:column>
+
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Intitulé"/>
+                        </f:facet>
+                        <h:outputText value="#{c.intitule}" styleClass="px-4 py-2 text-gray-700"/>
+                    </h:column>
+
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{c.description}" styleClass="px-4 py-2 text-gray-700"/>
+                    </h:column>
+
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Actions"/>
+                        </f:facet>
+
+                        <div class="flex space-x-3 px-4 py-2">
+
+                            <h:link outcome="/edits/editCategorie"
+                                    styleClass="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg shadow transition duration-200">
+                                <f:param name="idCategorie" value="#{c.id}" />
+                                Modifier
+                            </h:link>
+
+
+                            <h:commandButton value="Supprimer"
+                                             action="#{categorieBean.supprimer(c)}"
+                                             styleClass="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition duration-200 cursor-pointer"
+                                             />
+                        </div>
+                    </h:column>
+
+                </h:dataTable>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
