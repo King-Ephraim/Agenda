@@ -38,3 +38,13 @@ Cette application web permet aux utilisateurs de gérer facilement leurs événe
   - Séparation des couches EJB, JSF Managed Beans, et JPA Entities.
 
   - Code modulaire et facilement extensible.
+
+## Login page
+![Login](src/main/resources/images/login.png)
+
+## acceuil page
+![Accueil](src/main/resources/images/acceuil.png)
+
+## calendar page
+![Calendar](src/main/resources/images/calendar.png)
+
